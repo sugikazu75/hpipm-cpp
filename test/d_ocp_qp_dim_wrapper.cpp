@@ -23,9 +23,6 @@ bool hasNullptr(const d_ocp_qp_dim_wrapper& dim) {
       || dim.get()->nbu == nullptr
       || dim.get()->ng == nullptr
       || dim.get()->ns == nullptr
-      || dim.get()->nsbx == nullptr
-      || dim.get()->nsbu == nullptr
-      || dim.get()->nsg == nullptr
       || dim.get()->nbxe == nullptr
       || dim.get()->nbue == nullptr
       || dim.get()->nge == nullptr;
@@ -39,9 +36,6 @@ bool hasOnlyNullptr(const d_ocp_qp_dim_wrapper& dim) {
       && dim.get()->nbu == nullptr
       && dim.get()->ng == nullptr
       && dim.get()->ns == nullptr
-      && dim.get()->nsbx == nullptr
-      && dim.get()->nsbu == nullptr
-      && dim.get()->nsg == nullptr
       && dim.get()->nbxe == nullptr
       && dim.get()->nbue == nullptr
       && dim.get()->nge == nullptr;
@@ -59,9 +53,6 @@ bool hasSameSize(const d_ocp_qp_dim_wrapper& dim1,
     if (dim1.get()->nbu[i] != dim2.get()->nbu[i]) return false;
     if (dim1.get()->ng[i] != dim2.get()->ng[i]) return false;
     if (dim1.get()->ns[i] != dim2.get()->ns[i]) return false;
-    if (dim1.get()->nsbx[i] != dim2.get()->nsbx[i]) return false;
-    if (dim1.get()->nsbu[i] != dim2.get()->nsbu[i]) return false;
-    if (dim1.get()->nsg[i] != dim2.get()->nsg[i]) return false;
     if (dim1.get()->nbxe[i] != dim2.get()->nbxe[i]) return false;
     if (dim1.get()->nbue[i] != dim2.get()->nbue[i]) return false;
     if (dim1.get()->nge[i] != dim2.get()->nge[i]) return false;
@@ -79,9 +70,6 @@ bool hasSamePtr(const d_ocp_qp_dim_wrapper& dim1,
       || dim1.get()->nbu == dim2.get()->nbu
       || dim1.get()->ng == dim2.get()->ng
       || dim1.get()->ns == dim2.get()->ns
-      || dim1.get()->nsbx == dim2.get()->nsbx
-      || dim1.get()->nsbu == dim2.get()->nsbu
-      || dim1.get()->nsg == dim2.get()->nsg
       || dim1.get()->nbxe == dim2.get()->nbxe
       || dim1.get()->nbue == dim2.get()->nbue
       || dim1.get()->nge == dim2.get()->nge;
@@ -106,9 +94,6 @@ TEST_F(d_ocp_qp_dim_wrapper_test, copy) {
     dim.get()->nbu[i]  = distr(eng);
     dim.get()->ng[i]   = distr(eng);
     dim.get()->ns[i]   = distr(eng);
-    dim.get()->nsbx[i] = distr(eng);
-    dim.get()->nsbu[i] = distr(eng);
-    dim.get()->nsg[i]  = distr(eng);
     dim.get()->nbxe[i] = distr(eng);
     dim.get()->nbue[i] = distr(eng);
     dim.get()->nge[i]  = distr(eng);
@@ -145,9 +130,6 @@ TEST_F(d_ocp_qp_dim_wrapper_test, move) {
     dim.get()->nbu[i]  = distr(eng);
     dim.get()->ng[i]   = distr(eng);
     dim.get()->ns[i]   = distr(eng);
-    dim.get()->nsbx[i] = distr(eng);
-    dim.get()->nsbu[i] = distr(eng);
-    dim.get()->nsg[i]  = distr(eng);
     dim.get()->nbxe[i] = distr(eng);
     dim.get()->nbue[i] = distr(eng);
     dim.get()->nge[i]  = distr(eng);

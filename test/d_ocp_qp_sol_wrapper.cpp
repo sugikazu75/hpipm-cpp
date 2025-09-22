@@ -58,9 +58,6 @@ TEST_F(d_ocp_qp_sol_wrapper_test, copy) {
     dim->get()->nbu[i]  = distr(eng);
     dim->get()->ng[i]   = distr(eng);
     dim->get()->ns[i]   = distr(eng);
-    dim->get()->nsbx[i] = distr(eng);
-    dim->get()->nsbu[i] = distr(eng);
-    dim->get()->nsg[i]  = distr(eng);
     dim->get()->nbxe[i] = distr(eng);
     dim->get()->nbue[i] = distr(eng);
     dim->get()->nge[i]  = distr(eng);
@@ -98,9 +95,6 @@ TEST_F(d_ocp_qp_sol_wrapper_test, move) {
     dim->get()->nbu[i]  = distr(eng);
     dim->get()->ng[i]   = distr(eng);
     dim->get()->ns[i]   = distr(eng);
-    dim->get()->nsbx[i] = distr(eng);
-    dim->get()->nsbu[i] = distr(eng);
-    dim->get()->nsg[i]  = distr(eng);
     dim->get()->nbxe[i] = distr(eng);
     dim->get()->nbue[i] = distr(eng);
     dim->get()->nge[i]  = distr(eng);
@@ -144,9 +138,6 @@ TEST_F(d_ocp_qp_sol_wrapper_test, resize) {
     dim->get()->nbu[i]  = distr(eng);
     dim->get()->ng[i]   = distr(eng);
     dim->get()->ns[i]   = distr(eng);
-    dim->get()->nsbx[i] = distr(eng);
-    dim->get()->nsbu[i] = distr(eng);
-    dim->get()->nsg[i]  = distr(eng);
     dim->get()->nbxe[i] = distr(eng);
     dim->get()->nbue[i] = distr(eng);
     dim->get()->nge[i]  = distr(eng);
