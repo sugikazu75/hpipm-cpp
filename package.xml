@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hpipm-cpp</name>
+  <version>0.0.0</version>
+  <description>The hpipm-cpp package</description>
+  <maintainer email="sugihara@todo.todo">sugihara</maintainer>
+
+  <license>TODO</license>
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>git</build_depend>
+
+  <depend>blasfeo</depend>
+  <depend>hpipm</depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+
+</package>
