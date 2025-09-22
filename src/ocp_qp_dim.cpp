@@ -26,6 +26,7 @@ void OcpQpDim::resize(const unsigned int _N) {
   nsbx.resize(N+1);
   nsbu.resize(N+1);
   nsg.resize(N+1);
+  ns.resize(N+1);
 }
 
 

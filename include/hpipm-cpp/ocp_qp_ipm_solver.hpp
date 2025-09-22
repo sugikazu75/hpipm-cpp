@@ -150,6 +150,7 @@ private:
   std::vector<double*> zl_ptr_; 
   std::vector<double*> zu_ptr_; 
   std::vector<int*> idxs_ptr_; 
+  std::vector<int*> idxs_rev_ptr_;
   std::vector<double*> lls_ptr_; 
   std::vector<double*> lus_ptr_; 
 

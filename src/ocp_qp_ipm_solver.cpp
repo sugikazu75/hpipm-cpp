@@ -122,12 +122,10 @@ void OcpQpIpmSolver::resize(const std::vector<OcpQp>& ocp_qp) {
   wrapper_holder_->ocp_qp_dim_wrapper->resize(dim_.N);
   d_ocp_qp_dim_set_all(dim_.nx.data(), dim_.nu.data(), 
                        dim_.nbx.data(), dim_.nbu.data(), dim_.ng.data(), 
-                       dim_.nsbx.data(), dim_.nsbu.data(), dim_.nsg.data(), 
-                       wrapper_holder_->ocp_qp_dim_wrapper->get());
+                       dim_.ns.data(), wrapper_holder_->ocp_qp_dim_wrapper->get());
   // for initial state embedding
   d_ocp_qp_dim_set_nx(0, 0, wrapper_holder_->ocp_qp_dim_wrapper->get());
   d_ocp_qp_dim_set_nbx(0, 0, wrapper_holder_->ocp_qp_dim_wrapper->get());
-  d_ocp_qp_dim_set_nsbx(0, 0, wrapper_holder_->ocp_qp_dim_wrapper->get());
   b0_.resize(dim_.nx[0]);
   r0_.resize(dim_.nu[0]);
   Lr0_.resize(dim_.nu[0], dim_.nu[0]);
@@ -286,7 +284,7 @@ HpipmStatus OcpQpIpmSolver::solve(const Eigen::VectorXd& x0,
                    idxbu_ptr_.data(), lbu_ptr_.data(), ubu_ptr_.data(),
                    C_ptr_.data(), D_ptr_.data(), lg_ptr_.data(), ug_ptr_.data(), 
                    Zl_ptr_.data(), Zu_ptr_.data(), zl_ptr_.data(), zu_ptr_.data(), 
-                   idxs_ptr_.data(), lls_ptr_.data(), lus_ptr_.data(), ocp_qp_ptr);
+                   idxs_ptr_.data(), idxs_rev_ptr_.data(), lls_ptr_.data(), lus_ptr_.data(), ocp_qp_ptr);
 
   // masks
   for (int i=1; i<=dim_.N; ++i) {

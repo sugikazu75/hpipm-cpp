@@ -102,6 +102,11 @@ public:
   std::vector<int> nsg;
 
   ///
+  /// @brief Dimensions of slacks of soft constraints. Size must be N+1. Each element must be non-negative.
+  ///
+  std::vector<int> ns;
+
+  ///
   /// @brief Resizes the dimension.
   /// @param[in] N horizon length.
   ///
