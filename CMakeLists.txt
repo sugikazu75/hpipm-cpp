@@ -21,6 +21,7 @@ find_package(Eigen3 REQUIRED)
 add_library(
   ${PROJECT_NAME} 
   SHARED
+  src/dense_qp.cpp
   src/detail/d_ocp_qp_dim_wrapper.cpp
   src/detail/d_ocp_qp_wrapper.cpp
   src/detail/d_ocp_qp_sol_wrapper.cpp
