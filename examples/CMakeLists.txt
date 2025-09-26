@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.1)
 project(hpipm-cpp-examples CXX)
 
 find_package(Eigen3 REQUIRED)
+find_package(blasfeo CONFIG REQUIRED)
+find_package(hpipm CONFIG REQUIRED)
 find_package(hpipm-cpp REQUIRED)
 
 macro(add_example EXAMPLE)
