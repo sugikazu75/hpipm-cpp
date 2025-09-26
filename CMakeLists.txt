@@ -12,9 +12,9 @@ option(BUILD_TESTS "Build unit tests" OFF)
 #####################
 set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 # find blasfeo
-find_package(blasfeo REQUIRED)
+find_package(blasfeo CONFIG REQUIRED)
 # find hpipm
-find_package(hpipm REQUIRED)
+find_package(hpipm CONFIG REQUIRED)
 # find Eigen
 find_package(Eigen3 REQUIRED)
 
@@ -31,12 +31,8 @@ add_library(
   src/ocp_qp_ipm_solver_statistics.cpp
   src/ocp_qp_ipm_solver.cpp
 )
-target_link_libraries(
-  ${PROJECT_NAME} 
-  PUBLIC
-  ${blasfeo_DIR}/../lib/libblasfeo.so
-  ${hpipm_DIR}/../lib/libhpipm.so
-)
+target_link_libraries(${PROJECT_NAME} PUBLIC blasfeo hpipm)
+
 target_include_directories(
   ${PROJECT_NAME} 
   PUBLIC
