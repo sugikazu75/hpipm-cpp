@@ -32,6 +32,10 @@ namespace hpipm
     std::unique_ptr<uint8_t[]> ipm_arg_mem_ = nullptr;
     std::unique_ptr<uint8_t[]> ipm_ws_mem_ = nullptr;
     std::unique_ptr<double[]> opt_x_mem_ = nullptr;
+    std::unique_ptr<double[]> opt_lam_lb_mem_ = nullptr;
+    std::unique_ptr<double[]> opt_lam_ub_mem_ = nullptr;
+    std::unique_ptr<double[]> opt_lam_lg_mem_ = nullptr;
+    std::unique_ptr<double[]> opt_lam_ug_mem_ = nullptr;
 
     ///
     /// @brief Hessian for cost
@@ -78,15 +82,34 @@ namespace hpipm
     ///
     Eigen::VectorXd ubx_;
 
-    Eigen::VectorXd solve(Eigen::Ref<Eigen::MatrixXd> H,
-                          const Eigen::Ref<const Eigen::VectorXd> & g,
-                          const Eigen::Ref<const Eigen::MatrixXd> & A,
-                          const Eigen::Ref<const Eigen::VectorXd> & b,
-                          const Eigen::Ref<const Eigen::MatrixXd> & C,
-                          const Eigen::Ref<const Eigen::VectorXd> & lbg,
-                          const Eigen::Ref<const Eigen::VectorXd> & ubg,
-                          const Eigen::Ref<const Eigen::VectorXd> & lbx,
-                          const Eigen::Ref<const Eigen::VectorXd> & ubx);
+    ///
+    /// @brief QP solution
+    ///
+    Eigen::VectorXd opt_x_;
+
+    ///
+    /// @brief Dual solution
+    ///
+    Eigen::VectorXd opt_lam_lb_;
+    Eigen::VectorXd opt_lam_ub_;
+    Eigen::VectorXd opt_lam_b_;
+    Eigen::VectorXd opt_lam_lg_;
+    Eigen::VectorXd opt_lam_ug_;
+    Eigen::VectorXd opt_lam_g_;
+
+    void solve(Eigen::Ref<Eigen::MatrixXd> H,
+               const Eigen::Ref<const Eigen::VectorXd> & g,
+               const Eigen::Ref<const Eigen::MatrixXd> & A,
+               const Eigen::Ref<const Eigen::VectorXd> & b,
+               const Eigen::Ref<const Eigen::MatrixXd> & C,
+               const Eigen::Ref<const Eigen::VectorXd> & lbg,
+               const Eigen::Ref<const Eigen::VectorXd> & ubg,
+               const Eigen::Ref<const Eigen::VectorXd> & lbx,
+               const Eigen::Ref<const Eigen::VectorXd> & ubx);
+    void solve();
+    Eigen::VectorXd getOptX() { return opt_x_; }
+    Eigen::VectorXd getOptLamB() { return opt_lam_b_; }
+    Eigen::VectorXd getOptLamG() { return opt_lam_g_; }
 
   private:
     int dim_var_;
