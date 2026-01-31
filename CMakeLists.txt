@@ -32,7 +32,12 @@ add_library(
   src/ocp_qp_ipm_solver_statistics.cpp
   src/ocp_qp_ipm_solver.cpp
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC blasfeo hpipm)
+target_link_libraries(
+  ${PROJECT_NAME} 
+  PUBLIC
+  ${CMAKE_INSTALL_PREFIX}/lib/libblasfeo.so
+  ${CMAKE_INSTALL_PREFIX}/lib/libhpipm.so
+)
 
 target_include_directories(
   ${PROJECT_NAME} 
