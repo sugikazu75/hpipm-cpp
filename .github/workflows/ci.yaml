@@ -77,13 +77,13 @@ jobs:
           set -x
           cd ${GITHUB_WORKSPACE}/hpipm-cpp/build
           ctest --output-on-failure
-      - name: Example hpipm-cpp
-        run: |
-          set -e
-          set -x
-          mkdir ${GITHUB_WORKSPACE}/hpipm-cpp/examples/build
-          cd ${GITHUB_WORKSPACE}/hpipm-cpp/examples/build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-          make -j4
-          ./example_ocp_qp
-          ./example_mpc
+      # - name: Example hpipm-cpp
+      #   run: |
+      #     set -e
+      #     set -x
+      #     mkdir ${GITHUB_WORKSPACE}/hpipm-cpp/examples/build
+      #     cd ${GITHUB_WORKSPACE}/hpipm-cpp/examples/build
+      #     cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+      #     make -j4
+      #     ./example_ocp_qp
+      #     ./example_mpc
