@@ -52,7 +52,6 @@ d_ocp_qp_ipm_ws_wrapper::d_ocp_qp_ipm_ws_wrapper(d_ocp_qp_ipm_ws_wrapper&& other
   other.ocp_qp_ipm_ws_hpipm_.gamma = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_nuxM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_nbgM = nullptr;
-  other.ocp_qp_ipm_ws_hpipm_.tmp_nsM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.Pb = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.Zs_inv = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_m = nullptr;
@@ -100,7 +99,6 @@ d_ocp_qp_ipm_ws_wrapper& d_ocp_qp_ipm_ws_wrapper::operator=(d_ocp_qp_ipm_ws_wrap
   other.ocp_qp_ipm_ws_hpipm_.gamma = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_nuxM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_nbgM = nullptr;
-  other.ocp_qp_ipm_ws_hpipm_.tmp_nsM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.Pb = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.Zs_inv = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.tmp_m = nullptr;
@@ -142,6 +140,7 @@ void d_ocp_qp_ipm_ws_wrapper::resize(const std::shared_ptr<d_ocp_qp_dim_wrapper>
                                      const std::shared_ptr<d_ocp_qp_ipm_arg_wrapper>& ipm_arg) {
   dim_ = dim;
   ipm_arg_ = ipm_arg;
+  ipm_arg_->resize(dim_);
   const hpipm_size_t new_memsize = d_ocp_qp_ipm_ws_memsize(dim_->get(), ipm_arg_->get());
   if (memory_ != nullptr && new_memsize > memsize_) {
     free(memory_);

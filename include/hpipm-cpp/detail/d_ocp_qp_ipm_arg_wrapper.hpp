@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <memory>
 
 #include "Eigen/Core"
 
@@ -64,12 +65,19 @@ public:
   ///
   const d_ocp_qp_ipm_arg* get() const;
 
+  ///
+  /// @brief Resizes the hpipm argument for a given OCP-QP dimension.
+  /// @param[in] dim OCP-QP dimension wrapper.
+  ///
+  void resize(const std::shared_ptr<d_ocp_qp_dim_wrapper>& dim);
+
 private:
   d_ocp_qp_ipm_arg ocp_qp_ipm_arg_hpipm_;
   void *memory_ = nullptr;
   hpipm_size_t memsize_ = 0;
 
   void resize();
+  void resize_with_dim(const d_ocp_qp_dim* dim);
 
   void copy(const d_ocp_qp_ipm_arg_wrapper& other);
 };
