@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
-project(hpipm-cpp-examples CXX)
-
-find_package(Eigen3 REQUIRED)
-find_package(hpipm-cpp REQUIRED)
+find_package(Eigen3 REQUIRED NO_MODULE)
 
 macro(add_example EXAMPLE)
   add_executable(
@@ -12,13 +8,13 @@ macro(add_example EXAMPLE)
   target_include_directories(
     ${EXAMPLE} 
     PRIVATE
-    ${EIGEN_INCLUDE_DIR}
-    ${hpipm-cpp_INCLUDE_DIR}
+    ${PROJECT_SOURCE_DIR}/include
   )
   target_link_libraries(
     ${EXAMPLE} 
     PRIVATE
-    hpipm-cpp::hpipm-cpp
+    Eigen3::Eigen
+    ${PROJECT_NAME}
   )
 endmacro()
 
