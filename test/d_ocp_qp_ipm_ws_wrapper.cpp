@@ -29,7 +29,6 @@ bool hasNullptr(const d_ocp_qp_ipm_ws_wrapper& ws) {
       || ws.get()->gamma == nullptr
       || ws.get()->tmp_nuxM == nullptr
       || ws.get()->tmp_nbgM == nullptr
-      || ws.get()->tmp_nsM == nullptr
       || ws.get()->Pb == nullptr
       || ws.get()->Zs_inv == nullptr
       || ws.get()->tmp_m == nullptr
@@ -60,7 +59,6 @@ bool hasOnlyNullptr(const d_ocp_qp_ipm_ws_wrapper& ws) {
       && ws.get()->gamma == nullptr
       && ws.get()->tmp_nuxM == nullptr
       && ws.get()->tmp_nbgM == nullptr
-      && ws.get()->tmp_nsM == nullptr
       && ws.get()->Pb == nullptr
       && ws.get()->Zs_inv == nullptr
       && ws.get()->tmp_m == nullptr
@@ -92,7 +90,6 @@ bool hasSamePtr(const d_ocp_qp_ipm_ws_wrapper& ws1,
       || ws1.get()->gamma == ws2.get()->gamma
       || ws1.get()->tmp_nuxM == ws2.get()->tmp_nuxM
       || ws1.get()->tmp_nbgM == ws2.get()->tmp_nbgM
-      || ws1.get()->tmp_nsM == ws2.get()->tmp_nsM
       || ws1.get()->Pb == ws2.get()->Pb
       || ws1.get()->Zs_inv == ws2.get()->Zs_inv
       || ws1.get()->tmp_m == ws2.get()->tmp_m
@@ -125,9 +122,6 @@ TEST_F(d_ocp_qp_ipm_ws_wrapper_test, move) {
     dim->get()->nbu[i]  = distr(eng);
     dim->get()->ng[i]   = distr(eng);
     dim->get()->ns[i]   = distr(eng);
-    dim->get()->nsbx[i] = distr(eng);
-    dim->get()->nsbu[i] = distr(eng);
-    dim->get()->nsg[i]  = distr(eng);
     dim->get()->nbxe[i] = distr(eng);
     dim->get()->nbue[i] = distr(eng);
     dim->get()->nge[i]  = distr(eng);

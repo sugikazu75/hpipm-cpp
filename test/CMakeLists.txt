@@ -16,6 +16,11 @@ macro(add_hpipm_test TESTNAME)
     ${PROJECT_SOURCE_DIR}/include
     ${PINOCCHIO_INCLUDE_DIRS}
   )
+  target_compile_definitions(
+    ${TESTNAME}
+    PRIVATE
+    HPIPM_CPP_TEST_DATA_DIR="${PROJECT_SOURCE_DIR}/test"
+  )
   target_link_libraries(
     ${TESTNAME} 
     PRIVATE
@@ -23,10 +28,12 @@ macro(add_hpipm_test TESTNAME)
     GTest::GMock
     ${PROJECT_NAME}
   )
-  add_dependencies(
-    ${TESTNAME} 
-    googletest
-  )
+  if(TARGET googletest)
+    add_dependencies(
+      ${TESTNAME}
+      googletest
+    )
+  endif()
   add_test(
     NAME ${TESTNAME} 
     COMMAND $<TARGET_FILE:${TESTNAME}>

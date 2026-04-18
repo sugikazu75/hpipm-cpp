@@ -2,6 +2,28 @@ include(ExternalProject)
 
 # find pthread for googletest 
 find_package(Threads REQUIRED)
+find_package(GTest QUIET)
+
+# Prefer system-provided GTest targets when available.
+if(TARGET GTest::GTest)
+  if(NOT TARGET GTest::GMock)
+    if(TARGET GTest::gmock)
+      add_library(GTest::GMock INTERFACE IMPORTED)
+      set_target_properties(GTest::GMock PROPERTIES
+        INTERFACE_LINK_LIBRARIES GTest::gmock
+      )
+    else()
+      add_library(GTest::GMock INTERFACE IMPORTED)
+      set_target_properties(GTest::GMock PROPERTIES
+        INTERFACE_LINK_LIBRARIES GTest::GTest
+      )
+    endif()
+  endif()
+  set(GTEST_INCLUDE_PATH "")
+  set(GMOCK_INCLUDE_PATH "")
+  set(GTEST_LIBRARY_PATH "")
+  return()
+endif()
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 externalproject_add(
