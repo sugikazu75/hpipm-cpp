@@ -37,7 +37,7 @@ jobs:
           set -x
           mkdir ${GITHUB_WORKSPACE}/blasfeo/build
           cd ${GITHUB_WORKSPACE}/blasfeo/build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_SHARED_LIBS=ON -DBLASFEO_EXAMPLES=OFF
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_SHARED_LIBS=ON -DBLASFEO_EXAMPLES=OFF -DTARGET=GENERIC
           make -j4
           sudo make install
       - name: Checkout hpipm
