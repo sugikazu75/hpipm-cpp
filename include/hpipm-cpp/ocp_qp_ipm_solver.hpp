@@ -34,49 +34,55 @@ std::string to_string(const HpipmStatus& hpipm_status);
 std::ostream& operator<<(std::ostream& os, const HpipmStatus& hpipm_status);
 
 ///
-/// @class OcpQpIpmSolver
-/// @brief Ipm solver.
+/// @class OcpQpIpmSolverTpl
+/// @brief Ipm solver, templated on the scalar type (double / float).
 ///
-class OcpQpIpmSolver {
+template <typename Scalar>
+class OcpQpIpmSolverTpl {
 public:
+  using MatrixX = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
+  using VectorX = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
+  using OcpQp = OcpQpTpl<Scalar>;
+  using OcpQpSolution = OcpQpSolutionTpl<Scalar>;
+
   ///
   /// @brief Constructor.
   /// @param[in] ocp_qp OCP-QP problem.
   /// @param[in] solver_settings Solver settings.
   ///
-  OcpQpIpmSolver(const std::vector<OcpQp>& ocp_qp, 
-                 const OcpQpIpmSolverSettings& solver_settings=OcpQpIpmSolverSettings());
+  OcpQpIpmSolverTpl(const std::vector<OcpQp>& ocp_qp,
+                    const OcpQpIpmSolverSettings& solver_settings=OcpQpIpmSolverSettings());
 
   ///
   /// @brief Constructor.
   /// @param[in] solver_settings Solver settings.
   ///
-  OcpQpIpmSolver(const OcpQpIpmSolverSettings& solver_settings=OcpQpIpmSolverSettings());
+  OcpQpIpmSolverTpl(const OcpQpIpmSolverSettings& solver_settings=OcpQpIpmSolverSettings());
 
   ///
   /// @brief Destructor.
   ///
-  ~OcpQpIpmSolver();
+  ~OcpQpIpmSolverTpl();
 
   ///
   /// @brief Prohibit copy constructor.
   ///
-  OcpQpIpmSolver(const OcpQpIpmSolver&) = delete;
+  OcpQpIpmSolverTpl(const OcpQpIpmSolverTpl&) = delete;
 
   ///
   /// @brief Prohibit copy assign operator.
   ///
-  OcpQpIpmSolver& operator=(const OcpQpIpmSolver&) = delete;
+  OcpQpIpmSolverTpl& operator=(const OcpQpIpmSolverTpl&) = delete;
 
   ///
   /// @brief Default move constructor.
   ///
-  OcpQpIpmSolver(OcpQpIpmSolver&&) noexcept = default;
+  OcpQpIpmSolverTpl(OcpQpIpmSolverTpl&&) noexcept = default;
 
   ///
   /// @brief Default move assign operator.
   ///
-  OcpQpIpmSolver& operator=(OcpQpIpmSolver&&) noexcept = default;
+  OcpQpIpmSolverTpl& operator=(OcpQpIpmSolverTpl&&) noexcept = default;
 
   ///
   /// @brief Sets the Ipm solver settings.
@@ -97,7 +103,7 @@ public:
   /// @param[out] qp_sol Solution of the OCP-QP problem.
   /// @return Solver status.
   ///
-  HpipmStatus solve(const Eigen::VectorXd& x0, std::vector<OcpQp>& ocp_qp, 
+  HpipmStatus solve(const VectorX& x0, std::vector<OcpQp>& ocp_qp,
                     std::vector<OcpQpSolution>& qp_sol);
 
   ///
@@ -121,42 +127,47 @@ private:
   std::unique_ptr<WrapperHolder> wrapper_holder_;
 
   // raw pointer storage
-  std::vector<double*> A_ptr_; 
-  std::vector<double*> B_ptr_;
-  std::vector<double*> b_ptr_;
-  std::vector<double*> Q_ptr_; 
-  std::vector<double*> S_ptr_; 
-  std::vector<double*> R_ptr_; 
-  std::vector<double*> q_ptr_; 
-  std::vector<double*> r_ptr_; 
-  std::vector<int*> idxbx_ptr_; 
-  std::vector<double*> lbx_ptr_; 
-  std::vector<double*> ubx_ptr_; 
-  std::vector<double*> lbx_mask_ptr_; 
-  std::vector<double*> ubx_mask_ptr_; 
-  std::vector<int*> idxbu_ptr_; 
-  std::vector<double*> lbu_ptr_; 
-  std::vector<double*> ubu_ptr_; 
-  std::vector<double*> lbu_mask_ptr_; 
-  std::vector<double*> ubu_mask_ptr_; 
-  std::vector<double*> C_ptr_; 
-  std::vector<double*> D_ptr_;
-  std::vector<double*> lg_ptr_; 
-  std::vector<double*> ug_ptr_; 
-  std::vector<double*> lg_mask_ptr_; 
-  std::vector<double*> ug_mask_ptr_; 
-  std::vector<double*> Zl_ptr_; 
-  std::vector<double*> Zu_ptr_; 
-  std::vector<double*> zl_ptr_; 
-  std::vector<double*> zu_ptr_; 
-  std::vector<int*> idxs_ptr_; 
-  std::vector<double*> lls_ptr_; 
-  std::vector<double*> lus_ptr_; 
+  std::vector<Scalar*> A_ptr_;
+  std::vector<Scalar*> B_ptr_;
+  std::vector<Scalar*> b_ptr_;
+  std::vector<Scalar*> Q_ptr_;
+  std::vector<Scalar*> S_ptr_;
+  std::vector<Scalar*> R_ptr_;
+  std::vector<Scalar*> q_ptr_;
+  std::vector<Scalar*> r_ptr_;
+  std::vector<int*> idxbx_ptr_;
+  std::vector<Scalar*> lbx_ptr_;
+  std::vector<Scalar*> ubx_ptr_;
+  std::vector<Scalar*> lbx_mask_ptr_;
+  std::vector<Scalar*> ubx_mask_ptr_;
+  std::vector<int*> idxbu_ptr_;
+  std::vector<Scalar*> lbu_ptr_;
+  std::vector<Scalar*> ubu_ptr_;
+  std::vector<Scalar*> lbu_mask_ptr_;
+  std::vector<Scalar*> ubu_mask_ptr_;
+  std::vector<Scalar*> C_ptr_;
+  std::vector<Scalar*> D_ptr_;
+  std::vector<Scalar*> lg_ptr_;
+  std::vector<Scalar*> ug_ptr_;
+  std::vector<Scalar*> lg_mask_ptr_;
+  std::vector<Scalar*> ug_mask_ptr_;
+  std::vector<Scalar*> Zl_ptr_;
+  std::vector<Scalar*> Zu_ptr_;
+  std::vector<Scalar*> zl_ptr_;
+  std::vector<Scalar*> zu_ptr_;
+  std::vector<int*> idxs_ptr_;
+  std::vector<Scalar*> lls_ptr_;
+  std::vector<Scalar*> lus_ptr_;
 
   // initial state embedding
-  Eigen::VectorXd b0_, r0_;
-  Eigen::MatrixXd Lr0_, Lr0_inv_, G0_inv_, H0_, B0t_P1_, A0t_P1_;
+  VectorX b0_, r0_;
+  MatrixX Lr0_, Lr0_inv_, G0_inv_, H0_, B0t_P1_, A0t_P1_;
 };
+
+///
+/// @brief Backward-compatible alias for the double-precision IPM solver.
+///
+using OcpQpIpmSolver = OcpQpIpmSolverTpl<double>;
 
 } // namespace hpipm
 

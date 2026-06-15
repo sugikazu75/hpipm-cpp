@@ -6,46 +6,54 @@
 namespace hpipm {
 
 ///
-/// @class OcpQpSolution
-/// @brief Solution of the OCP-QP problem.
+/// @class OcpQpSolutionTpl
+/// @brief Solution of the OCP-QP problem, templated on the scalar type.
 ///
-struct OcpQpSolution {
-public:
-  ///
-  /// @brief State. 
-  ///
-  Eigen::VectorXd x;
+template <typename Scalar>
+struct OcpQpSolutionTpl {
+  using MatrixX = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
+  using VectorX = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
   ///
-  /// @brief Control input. 
+  /// @brief State.
   ///
-  Eigen::VectorXd u;
+  VectorX x;
 
   ///
-  /// @brief Costate (the Lagrange multiplier w.r.t the state equation). 
+  /// @brief Control input.
   ///
-  Eigen::VectorXd pi;
+  VectorX u;
 
   ///
-  /// @brief Riccati matrix P. 
+  /// @brief Costate (the Lagrange multiplier w.r.t the state equation).
   ///
-  Eigen::MatrixXd P;
+  VectorX pi;
 
   ///
-  /// @brief Riccati vector s. 
+  /// @brief Riccati matrix P.
   ///
-  Eigen::VectorXd p;
+  MatrixX P;
 
   ///
-  /// @brief Feedback gain. 
+  /// @brief Riccati vector s.
   ///
-  Eigen::MatrixXd K;
+  VectorX p;
 
   ///
-  /// @brief Feedforward term. 
+  /// @brief Feedback gain.
   ///
-  Eigen::VectorXd k;
+  MatrixX K;
+
+  ///
+  /// @brief Feedforward term.
+  ///
+  VectorX k;
 };
+
+///
+/// @brief Backward-compatible alias for the double-precision OCP-QP solution.
+///
+using OcpQpSolution = OcpQpSolutionTpl<double>;
 
 } // namespace hpipm
 
