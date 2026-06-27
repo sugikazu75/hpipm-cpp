@@ -33,7 +33,7 @@ public:
   ///
   /// @brief Minimum step size. Must be positive and less than 1.0. Default is 1.0e-08.
   ///
-  double alpha_min = 1.0e-08;
+  double alpha_min = 1.0e-05;
 
   ///
   /// @brief Initial barrier parameter. Must be positive. Default is 1.0e+02.
@@ -43,27 +43,27 @@ public:
   ///
   /// @brief Convergence criteria. Must be positive. Default is 1.0e-08.
   ///
-  double tol_stat = 1.0e-08;
+  double tol_stat = 1.0e-05;
 
   ///
   /// @brief Convergence criteria. Must be positive. Default is 1.0e-08.
   ///
-  double tol_eq = 1.0e-08;
+  double tol_eq = 1.0e-05;
 
   ///
   /// @brief Convergence criteria. Must be positive. Default is 1.0e-08.
   ///
-  double tol_ineq = 1.0e-08;
+  double tol_ineq = 1.0e-05;
 
   ///
   /// @brief Convergence criteria. Must be positive. Default is 1.0e-08.
   ///
-  double tol_comp = 1.0e-08; // convergence criteria
+  double tol_comp = 1.0e-05; // convergence criteria
 
   ///
   /// @brief Regularization term. Must be non-negative. Default is 1.0e-12.
   ///
-  double reg_prim = 1.0e-12;
+  double reg_prim = 1.0e-6;
 
   ///
   /// @brief Warm start flag (0: disable, 1: enable). Default is 0.

@@ -15,19 +15,20 @@ namespace hpipm {
 struct OcpQpDim {
 public:
   ///
-  /// @brief Constructor. 
+  /// @brief Constructor.
   /// @param[in] N Horizon length.
   ///
   OcpQpDim(const unsigned int N);
 
   ///
-  /// @brief Constructor. 
+  /// @brief Constructor.
   /// @param[in] ocp_qp OCP-QP data.
   ///
-  OcpQpDim(const std::vector<OcpQp>& ocp_qp);
+  template <typename Scalar>
+  OcpQpDim(const std::vector<OcpQpTpl<Scalar>>& ocp_qp);
 
   ///
-  /// @brief Default constructor. 
+  /// @brief Default constructor.
   ///
   OcpQpDim() = default;
 
@@ -59,7 +60,7 @@ public:
   ///
   /// @brief Horizon length.
   ///
-  unsigned int N; 
+  unsigned int N;
 
   ///
   /// @brief Dimensions of x over the horizon. Size must be N+1. Each element must be positive.
@@ -111,15 +112,19 @@ public:
   /// @brief Resizes the dimension.
   /// @param[in] ocp_qp OCP-QP data.
   ///
-  void resize(const std::vector<OcpQp>& ocp_qp);
+  template <typename Scalar>
+  void resize(const std::vector<OcpQpTpl<Scalar>>& ocp_qp);
 
   ///
   /// @brief Check the sizes of OCP-QP data. If something is wrong, throws an exception.
   /// @param[in] ocp_qp OCP-QP data.
   ///
-  void checkSize(const std::vector<OcpQp>& ocp_qp) const;
+  template <typename Scalar>
+  void checkSize(const std::vector<OcpQpTpl<Scalar>>& ocp_qp) const;
 };
 
 } // namespace hpipm
+
+#include "hpipm-cpp/ocp_qp_dim.hxx"
 
 #endif // HPIPM_CPP_OCP_QP_DIM_HPP_

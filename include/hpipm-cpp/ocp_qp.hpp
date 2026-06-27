@@ -9,49 +9,53 @@
 namespace hpipm {
 
 ///
-/// @class OcpQp
-/// @brief The OCP-QP data class.
+/// @class OcpQpTpl
+/// @brief The OCP-QP data class, templated on the scalar type (double / float).
 ///
-struct OcpQp {
-  ///
-  /// @brief Dynamics matrix in x[i+1] = A[i] x[i] + B[i] u[i] + b[i]. 
-  ///
-  Eigen::MatrixXd A; 
+template <typename Scalar>
+struct OcpQpTpl {
+  using MatrixX = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
+  using VectorX = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
   ///
-  /// @brief Dynamics matrix in x[i+1] = A[i] x[i] + B[i] u[i] + b[i]. 
+  /// @brief Dynamics matrix in x[i+1] = A[i] x[i] + B[i] u[i] + b[i].
   ///
-  Eigen::MatrixXd B;
+  MatrixX A;
 
   ///
-  /// @brief Dynamics vector in x[i+1] = A[i] x[i] + B[i] u[i] + b[i]. 
+  /// @brief Dynamics matrix in x[i+1] = A[i] x[i] + B[i] u[i] + b[i].
   ///
-  Eigen::VectorXd b;
+  MatrixX B;
 
   ///
-  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].   
+  /// @brief Dynamics vector in x[i+1] = A[i] x[i] + B[i] u[i] + b[i].
   ///
-  Eigen::MatrixXd Q;
+  VectorX b;
 
   ///
-  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].   
+  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].
   ///
-  Eigen::MatrixXd S;
+  MatrixX Q;
 
   ///
-  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].   
+  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].
   ///
-  Eigen::MatrixXd R;
+  MatrixX S;
 
   ///
-  /// @brief Cost vector in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].   
+  /// @brief Cost matrix in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].
   ///
-  Eigen::VectorXd q;
+  MatrixX R;
 
   ///
-  /// @brief Cost vector in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].   
+  /// @brief Cost vector in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].
   ///
-  Eigen::VectorXd r;
+  VectorX q;
+
+  ///
+  /// @brief Cost vector in (1/2) * x[i]^T Q[i] x[i] + u[i]^T S[i] x[i] + (1/2) * u[i]^T R[i] u[i] + q[i]^T x[i] + r[i]^T u[i].
+  ///
+  VectorX r;
 
   ///
   /// @brief Indices of box constrainted elements of x.
@@ -61,26 +65,26 @@ struct OcpQp {
   ///
   /// @brief Lower bounds of box constraints on x.
   ///
-  Eigen::VectorXd lbx; 
+  VectorX lbx;
 
   ///
   /// @brief Upper bounds of box constraints on x.
-  /// Size must be OcpQpDim::N+1. 
+  /// Size must be OcpQpDim::N+1.
   /// Size of each element must be OcpQpDim::nbx[i].
   ///
-  Eigen::VectorXd ubx; 
+  VectorX ubx;
 
   ///
   /// @brief Masks on the lower bounds of box constraints on x.
   /// Each element must be composed only by 0 or 1.0.
   ///
-  Eigen::VectorXd lbx_mask;
+  VectorX lbx_mask;
 
   ///
   /// @brief Masks on the upper bounds of box constraints on x.
   /// Each element must be composed only by 0 or 1.0.
   ///
-  Eigen::VectorXd ubx_mask;
+  VectorX ubx_mask;
 
   ///
   /// @brief Indices of box constrainted elements of u.
@@ -90,75 +94,75 @@ struct OcpQp {
   ///
   /// @brief Lower bounds of box constraints on u.
   ///
-  Eigen::VectorXd lbu; 
+  VectorX lbu;
 
   ///
   /// @brief Upper bounds of box constraints on u.
   ///
-  Eigen::VectorXd ubu; 
+  VectorX ubu;
 
   ///
   /// @brief Masks on the lower bounds of box constraints on u.
   ///
-  Eigen::VectorXd lbu_mask;
+  VectorX lbu_mask;
 
   ///
   /// @brief Masks on the upper bounds of box constraints on u.
   /// Each element must be composed only by 0 or 1.0.
   ///
-  Eigen::VectorXd ubu_mask;
+  VectorX ubu_mask;
 
   ///
-  /// @brief Constraint matrix in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Constraint matrix in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   ///
-  Eigen::MatrixXd C;
+  MatrixX C;
 
   ///
-  /// @brief Constraint matrix in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Constraint matrix in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   ///
-  Eigen::MatrixXd D;
+  MatrixX D;
 
   ///
-  /// @brief Constraint vector in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Constraint vector in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   ///
-  Eigen::VectorXd lg; 
+  VectorX lg;
 
   ///
-  /// @brief Constraint vector in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Constraint vector in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   ///
-  Eigen::VectorXd ug; 
+  VectorX ug;
 
   ///
-  /// @brief Masks on lower bounds in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Masks on lower bounds in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   /// Each element must be composed only by 0 or 1.0.
   ///
-  Eigen::VectorXd lg_mask;
+  VectorX lg_mask;
 
   ///
-  /// @brief Masks on upper bounds in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].   
+  /// @brief Masks on upper bounds in lg[i] < C[i] x[i] + D[i] u[i] < ug[i].
   /// Each element must be composed only by 0 or 1.0.
   ///
-  Eigen::VectorXd ug_mask;
+  VectorX ug_mask;
 
   ///
   /// @brief Matrix in the slack penalty (1/2) sl^T Zl sl + zl^T sl + (1/2) su^T Zu su + zu^T su.
   ///
-  Eigen::MatrixXd Zl;
+  MatrixX Zl;
 
   ///
   /// @brief Matrix in the slack penalty (1/2) sl^T Zl sl + zl^T sl + (1/2) su^T Zu su + zu^T su.
   ///
-  Eigen::MatrixXd Zu;
+  MatrixX Zu;
 
   ///
   /// @brief Vector in the slack penalty (1/2) sl^T Zl sl + zl^T sl + (1/2) su^T Zu su + zu^T su.
   ///
-  Eigen::VectorXd zl;
+  VectorX zl;
 
   ///
   /// @brief Vector in the slack penalty (1/2) sl^T Zl sl + zl^T sl + (1/2) su^T Zu su + zu^T su.
   ///
-  Eigen::VectorXd zu;
+  VectorX zu;
 
   ///
   /// @brief Indices of box constrainted elements of slack variables.
@@ -168,13 +172,18 @@ struct OcpQp {
   ///
   /// @brief Lower bounds of box constraints of slack variables.
   ///
-  Eigen::VectorXd lls;
+  VectorX lls;
 
   ///
   /// @brief Upper bounds of box constraints of slack variables.
   ///
-  Eigen::VectorXd lus;
+  VectorX lus;
 };
+
+///
+/// @brief Backward-compatible alias for the double-precision OCP-QP data.
+///
+using OcpQp = OcpQpTpl<double>;
 
 } // namespace hpipm
 
