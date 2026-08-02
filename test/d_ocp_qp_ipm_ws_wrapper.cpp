@@ -39,7 +39,7 @@ bool hasNullptr(const d_ocp_qp_ipm_ws_wrapper& ws) {
       || ws.get()->Lh == nullptr
       || ws.get()->AL == nullptr
       || ws.get()->lq0 == nullptr
-      || ws.get()->tmp_nxM_nxM == nullptr
+      || ws.get()->tmp_nuxM_nuxM == nullptr
       || ws.get()->stat == nullptr
       || ws.get()->use_hess_fact == nullptr
       || ws.get()->lq_work0 == nullptr;
@@ -69,7 +69,7 @@ bool hasOnlyNullptr(const d_ocp_qp_ipm_ws_wrapper& ws) {
       && ws.get()->Lh == nullptr
       && ws.get()->AL == nullptr
       && ws.get()->lq0 == nullptr
-      && ws.get()->tmp_nxM_nxM == nullptr
+      && ws.get()->tmp_nuxM_nuxM == nullptr
       && ws.get()->stat == nullptr
       && ws.get()->use_hess_fact == nullptr
       && ws.get()->lq_work0 == nullptr;
@@ -100,7 +100,7 @@ bool hasSamePtr(const d_ocp_qp_ipm_ws_wrapper& ws1,
       || ws1.get()->Lh == ws2.get()->Lh
       || ws1.get()->AL == ws2.get()->AL
       || ws1.get()->lq0 == ws2.get()->lq0
-      || ws1.get()->tmp_nxM_nxM == ws2.get()->tmp_nxM_nxM
+      || ws1.get()->tmp_nuxM_nuxM == ws2.get()->tmp_nuxM_nuxM
       || ws1.get()->stat == ws2.get()->stat
       || ws1.get()->use_hess_fact == ws2.get()->use_hess_fact
       || ws1.get()->lq_work0 == ws2.get()->lq_work0;
