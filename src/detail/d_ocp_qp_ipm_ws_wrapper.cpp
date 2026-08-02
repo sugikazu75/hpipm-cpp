@@ -62,7 +62,7 @@ d_ocp_qp_ipm_ws_wrapper::d_ocp_qp_ipm_ws_wrapper(d_ocp_qp_ipm_ws_wrapper&& other
   other.ocp_qp_ipm_ws_hpipm_.Lh = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.AL = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.lq0 = nullptr;
-  other.ocp_qp_ipm_ws_hpipm_.tmp_nxM_nxM = nullptr;
+  other.ocp_qp_ipm_ws_hpipm_.tmp_nuxM_nuxM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.stat = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.use_hess_fact = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.lq_work0 = nullptr;
@@ -109,7 +109,7 @@ d_ocp_qp_ipm_ws_wrapper& d_ocp_qp_ipm_ws_wrapper::operator=(d_ocp_qp_ipm_ws_wrap
   other.ocp_qp_ipm_ws_hpipm_.Lh = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.AL = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.lq0 = nullptr;
-  other.ocp_qp_ipm_ws_hpipm_.tmp_nxM_nxM = nullptr;
+  other.ocp_qp_ipm_ws_hpipm_.tmp_nuxM_nuxM = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.stat = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.use_hess_fact = nullptr;
   other.ocp_qp_ipm_ws_hpipm_.lq_work0 = nullptr;
